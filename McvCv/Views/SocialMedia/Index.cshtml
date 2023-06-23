@@ -1,0 +1,95 @@
+﻿@using McvCv.Models.Entity
+@model List<TblSocial>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Sosyal Medya Listem</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Yeni Sosyal Medya Hesabı Ekle</button>
+                                <br />
+                                <br />
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Sosyal Medya</th>
+                                            <th>Durum</th>
+                                            <th>Sil</th>
+                                            <th>Düzenle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var x in Model)
+                                        {
+                                            String durum;
+                                            if(x.Status == true)
+                                            {
+                                                durum = "Aktif";
+                                            }
+                                            else 
+                                            {
+                                                durum = "Pasif";
+                                            }
+                                           
+                                            <tr>
+                                                <td>@x.ID</td>
+                                                <td>@x.Name</td>
+                                                <td>@durum</td>
+                                                <td><a href="/SocialMedia/UpdateSocial/@x.ID" class="btn btn-danger">Güncelle</a></td>
+                                                <td><a href="/SocialMedia/DeleteSocial/@x.ID" class="btn btn-warning">Aktif/Pasif</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+        <div class="modal" id="Modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Sosyal Medya Ekleme Paneli</h2>
+                    </div>
+                    <form method="post" action="/SocialMedia/AddSocial">
+                        <div class="modal-body">
+                            <label>Sosyal Medya ismi</label>
+                            <input type="text" name="Name" class="form-control" />
+                            <br />
+                            <label>Sosyal Medya Linki</label>
+                            <input type="text" name="Link" class="form-control" />
+                            <br />
+                            <label>İkon Değeri</label>
+                            <input type="text" name="Icon" class="form-control" />
+                            <br />
+                            <button class="btn btn-info">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

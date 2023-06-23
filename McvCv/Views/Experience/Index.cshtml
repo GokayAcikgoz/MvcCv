@@ -1,0 +1,32 @@
+﻿@using McvCv.Models.Entity
+@model List<TblExperience>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Deneyim Listesi</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Başlık</th>
+        <th>Alt Başlık</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach(var x in Model) {
+    <tr>
+        <td>@x.Id</td>
+        <td>@x.Title</td>
+        <td>@x.SubTitle</td>
+        <td>@x.Date</td>
+        <td><a href="/Experience/DeleteExperience/@x.Id" class="btn btn-danger">Sil</a></td>
+        <td><a href="/Experience/GetExperience/@x.Id" class="btn btn-warning">Düzenle</a></td>
+    </tr>
+    }
+</table>
+<a href="/Experience/AddExperience" class="btn btn-primary">Yeni Deneyim Ekle</a>
+
